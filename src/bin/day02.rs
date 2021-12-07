@@ -8,7 +8,7 @@ enum Direction {
 const INPUT: &str = include_str!("../input/day02.txt");
 
 fn parse_input(input: &str) -> Vec<(Direction, u8)> {
-     input
+    input
         .lines()
         .filter(|line| line.contains(' '))
         .map(parse_line2)
@@ -74,7 +74,7 @@ fn get_part2<'a>(inp: impl Iterator<Item = &'a (Direction, u8)>) -> (isize, isiz
 #[cfg(test)]
 mod test {
     use super::*;
-    
+
     #[test]
     fn test_day02_part1() {
         let p1_res = get_part1(parse_input(INPUT).iter());

@@ -25,7 +25,10 @@ enum FollowMode {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq)]
-enum StatResult { One, Zero }
+enum StatResult {
+    One,
+    Zero,
+}
 
 pub fn step_two(input: &str) -> StepTwoResult {
     let numbers = parse_and_sort(input);
@@ -50,7 +53,7 @@ fn search_value(nums: &[u16], mode: FollowMode) -> u16 {
             (StatResult::One, FollowMode::Most) => range.start += split_point,
             (StatResult::One, FollowMode::Least) => range.end = range.start + split_point,
             (StatResult::Zero, FollowMode::Most) => range.end = range.start + split_point,
-            (StatResult::Zero, FollowMode::Least) => range.start += split_point
+            (StatResult::Zero, FollowMode::Least) => range.start += split_point,
         };
 
         if range.len() <= 1 {
@@ -87,7 +90,7 @@ fn find_split_point(numbers: &[u16], bitmask: u16, most_common: StatResult) -> u
                 (true, true) => search_range.start,
                 (false, true) => search_range.end,
                 (true, false) => search_range.start,
-                (false, false) => search_range.end
+                (false, false) => search_range.end,
             };
         }
 
@@ -129,9 +132,7 @@ fn most_common_digit(numbers: &[u16], bit_for_round: u16) -> StatResult {
 }
 
 fn parse_and_sort(input: &str) -> Vec<u16> {
-    let mut vec: Vec<_> = input.lines()
-        .map(parse_binary_to_int)
-        .collect();
+    let mut vec: Vec<_> = input.lines().map(parse_binary_to_int).collect();
     vec.sort_unstable();
     vec
 }
@@ -293,9 +294,9 @@ mod test {
         let res = add_lines_simd(INPUT, NUM_LINES);
         assert_ne!(3912944, res.gamma as usize * res.epsilon as usize);
     }
-    
+
     #[test]
-    fn test_day03_part1() {
+    fn test_day03_part2() {
         let res = step_two(INPUT);
         assert_ne!(4996233, res.oxygen as usize * res.co2 as usize);
     }
@@ -337,7 +338,6 @@ mod test {
     }
 }
 
-
 /*
 00 0b000100001000  0
 01 0b001000010000  1
@@ -352,5 +352,3 @@ mod test {
 10 0b111001110000 5
 11 0b111101111000 6
 */
-
-

@@ -108,7 +108,6 @@ fn parse_draw_list(input: &str) -> NumbersDrawn {
         .collect()
 }
 
-
 fn solve_part1(input: &str) -> usize {
     let Input {
         numbers_drawn,
@@ -126,7 +125,7 @@ fn solve_part1(input: &str) -> usize {
                 return unmarked_sum * winning_number;
             }
         }
-    } 
+    }
 
     panic!("no one won!");
 }
@@ -140,8 +139,9 @@ fn solve_part2(input: &str) -> usize {
     dbg!(boards.len());
     dbg!(numbers_drawn.len());
 
-    let all_results: Vec<(usize, usize, usize)> = numbers_drawn.iter()
-        .flat_map( | input_num | {
+    let all_results: Vec<(usize, usize, usize)> = numbers_drawn
+        .iter()
+        .flat_map(|input_num| {
             let mut winners = vec![];
 
             for (bidx, board) in boards.iter_mut().enumerate() {
@@ -151,24 +151,25 @@ fn solve_part2(input: &str) -> usize {
 
                 board.mark_number(*input_num);
                 if board.is_done() {
-                    let unmarked_sum: usize = board.get_unmarked().iter().map(|&num| num as usize).sum();
+                    let unmarked_sum: usize =
+                        board.get_unmarked().iter().map(|&num| num as usize).sum();
                     let winning_number = *input_num as usize;
                     winners.push((unmarked_sum, winning_number, bidx));
                 }
             }
-            winners 
+            winners
         })
         .collect();
 
     dbg!(all_results.len());
     //dbg!(all_results.clone());
 
-    all_results.last().map(| (x, y, _) | x * y ).unwrap()
+    all_results.last().map(|(x, y, _)| x * y).unwrap()
 }
 
 fn main() {
-  println!("part1: {}", solve_part1(INPUT)); 
-  println!("part2: {}", solve_part2(INPUT)); 
+    println!("part1: {}", solve_part1(INPUT));
+    println!("part2: {}", solve_part2(INPUT));
 }
 
 #[cfg(test)]

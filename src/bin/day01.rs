@@ -1,7 +1,7 @@
 const INPUT: &str = include_str!("../input/day01.txt");
 
 fn parse_input(input: &str) -> Vec<u32> {
-     input
+    input
         .lines()
         .filter(|line| !line.trim().is_empty())
         .map(|line| line.parse().unwrap())
@@ -43,7 +43,6 @@ fn main() {
     println!("result 2: {}", res);
 }
 
-
 #[cfg(test)]
 mod test {
     use super::*;
@@ -62,5 +61,4 @@ mod test {
 
         assert_eq!(expected_result, result);
     }
-
 }
